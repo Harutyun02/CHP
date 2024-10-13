@@ -1,0 +1,25 @@
+class GCD:
+    def __init__(self, a, b):
+        # erku amboxj tveri skzbnavorum
+        self.num1 = a
+        self.num2 = b
+
+    #Amenamec endaurh bajanarari hashvum Evklidesyan algoritmov
+    def calculate_gcd(self):
+        a, b = self.num1, self.num2
+        #Evclidesi algoritmi irakanacum
+        while b != 0:
+            a, b = b, a % b  # poxenq  a-n b-ov , isk b-n a-i mnacordin vore bajanvum e b-i
+        return a
+
+    #amenamec bajanarare cucadrelu metod
+    def display_result(self):
+        print(f"GCD of {self.num1} and {self.num2} is: {self.calculate_gcd()}")
+
+if __name__ == "__main__":
+    #stanum e ogtvoxi koxmic  mutqagrvac erku amboxj tver
+    num1, num2 = map(int, input("Enter two numbers: ").split())
+    #mutqagrvac tverov stexcum e GCD dasi obyekt 
+    gcd_object = GCD(num1, num2)
+    #kanch display_result() vorpesi cuyc ta GCD-n
+    gcd_object.display_result()
