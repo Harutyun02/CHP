@@ -1,0 +1,55 @@
+from collections import Counter
+
+class EncoderDecoder:
+    def __init__(self, input_sentence, num_rows):
+        self.sentence = input_sentence
+        self.rows = num_rows
+        self.matrix = []
+        self.create_matrix()
+
+    def create_matrix(self):
+        # Determine the number of columns needed
+        length = len(self.sentence)
+        cols = (length + self.rows - 1) // self.rows  # ceiling division
+        # Initialize the matrix with empty spaces
+        self.matrix = [[' ' for _ in range(cols)] for _ in range(self.rows)]
+        
+        # Fill the matrix column by column
+        index = 0
+        for j in range(cols):
+            for i in range(self.rows):
+                if index < length:
+                    self.matrix[i][j] = self.sentence[index]
+                    index += 1
+
+    def display_matrix(self):
+        print("Matrix:")
+        for row in self.matrix:
+            print(' '.join(row))
+
+    def encode_matrix(self):
+        # Convert matrix back into a single string
+        encoded = ''.join(''.join(row) for row in self.matrix)
+        return encoded
+
+    def encode_rle(self, input_str):
+        # Run-Length Encoding (RLE)
+        frequency = Counter(input_str)
+        encoded = ''.join(f"{char}{count}" for char, count in frequency.items())
+        return encoded
+
+
+# Main execution
+if __name__ == "__main__":
+    sentence = input("Naxadasutyun: ")
+    rows = int(input("Enter i: "))
+    
+    encoder_decoder = EncoderDecoder(sentence, rows)
+    encoder_decoder.display_matrix()
+    
+    matrix_encoded_sentence = encoder_decoder.encode_matrix()
+    print(f"Toxer-Syuner: {matrix_encoded_sentence}")
+    
+    rle_encoded_sentence = encoder_decoder.encode_rle(matrix_encoded_sentence)
+    print(f"RLE_ov: {rle_encoded_sentence}")
+
